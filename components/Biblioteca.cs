@@ -24,7 +24,7 @@ namespace proyectoGrupal01.components
 
         public void PrestarLibro(string titulo, string usuario)
         {
-            Libro libro = _libros.FirstOrDefault(l => l.Titulo == titulo);
+            Libro? libro = _libros.FirstOrDefault(l => l.Titulo == titulo);
             if (libro == null)
             {
                 throw new InvalidOperationException("El libro no existe en la biblioteca.");
@@ -39,7 +39,7 @@ namespace proyectoGrupal01.components
 
         public void DevolverLibro(string titulo)
         {
-            Libro libro = _libros.FirstOrDefault(l => l.Titulo == titulo);
+            Libro? libro = _libros.FirstOrDefault(l => l.Titulo == titulo);
             if (libro == null)
             {
                 throw new InvalidOperationException("El libro no existe en la biblioteca.");

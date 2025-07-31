@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using proyectoGrupal01.components;
 
 namespace proyectoGrupal01.components
@@ -7,15 +8,25 @@ namespace proyectoGrupal01.components
     {
         public static void Main(string[] args)
         {
-            //EJERCICIO 01
-            
+            Console.WriteLine("Iniciando Ejercicios...\n");
+            Ejercicio01Casos();
+            Ejercicio02Casos();
+            Ejercicio03Casos();
+            Ejercicio04Casos();
+            Ejercicio05Casos();
+            Ejercicio06Casos();
+            Console.WriteLine("\nTodos los ejercicios han sido ejecutados.");
+        }
+
+        private static void Ejercicio01Casos()
+        {
+            Console.WriteLine("\n=== Iniciando Ejercicio 01 ===");
+            // EJERCICIO 01: Gestión de una biblioteca de libros
             Biblioteca miBiblioteca = new Biblioteca();
-            // creamos nuevos libros
             Libro libro1 = new Libro("El Principito", "Antoine de Saint");
             Libro libroPrueba = new Libro("El Principito", "Daniel Ramirez");
             Libro libro2 = new Libro("Cien años de soledad", "Gabriel García Márquez");
 
-            // Agregar libros a la biblioteca
             try
             {
                 miBiblioteca.AgregarLibro(libro1);
@@ -27,82 +38,99 @@ namespace proyectoGrupal01.components
                 Console.WriteLine($"Error al agregar libro: {ex.Message}");
             }
 
-            // Mostrar los libros disponibles
-            Console.WriteLine("*******************  Libros disponibles  *******************");
+            Console.WriteLine("\n******************* Libros disponibles *******************");
             var librosDisponibles = miBiblioteca.ObtenerLibrosDisponibles();
             foreach (var libro in librosDisponibles)
             {
                 Console.WriteLine(libro.ToString());
             }
 
-            // Prestar un libro
-            Console.WriteLine("> Se prestará el siguiente libro: 📚");
             try
             {
+                Console.WriteLine("\n> Se prestará el siguiente libro: 📚");
                 miBiblioteca.PrestarLibro("El Principito", "Juan Pérez");
-                Console.WriteLine("Libro prestado correctamente. \n");
+                Console.WriteLine("Libro prestado correctamente.\n");
             }
             catch (InvalidOperationException ex)
             {
                 Console.WriteLine($"Error al prestar libro: {ex.Message}");
             }
 
-            // Mostrar los libros disponibles después del préstamo
-            Console.WriteLine("*******************  Libros disponibles  *******************");
+            Console.WriteLine("******************* Libros disponibles *******************");
             librosDisponibles = miBiblioteca.ObtenerLibrosDisponibles();
             foreach (var libro in librosDisponibles)
             {
                 Console.WriteLine(libro.ToString());
             }
 
-            // Devolver un libro
-            Console.WriteLine("> Se devolverá el siguiente libro: 📚");
             try
             {
+                Console.WriteLine("\n> Se devolverá el siguiente libro: 📚");
                 miBiblioteca.DevolverLibro("El Principito");
-                Console.WriteLine("Libro devuelto correctamente. \n");
+                Console.WriteLine("Libro devuelto correctamente.\n");
             }
             catch (InvalidOperationException ex)
             {
                 Console.WriteLine($"Error al devolver libro: {ex.Message}");
             }
 
-            // Mostrar los libros disponibles después de la devolución
-            Console.WriteLine("*******************  Libros disponibles  *******************");
+            Console.WriteLine("******************* Libros disponibles *******************");
             librosDisponibles = miBiblioteca.ObtenerLibrosDisponibles();
             foreach (var libro in librosDisponibles)
             {
                 Console.WriteLine(libro.ToString());
             }
-            
-            //EJERCIO #2 : Usuario con validación de campos sensibles
-            // /*
-            //     Aplicar reglas de validación dentro de propiedades y proteger datos privados.
-            //     Crea una clase Usuario con los siguientes atributos:
-            //     Nombre (público)
-            //     DPI (debe validarse: exactamente 13 dígitos)
-            //     Contraseña (mínimo 6 caracteres; solo se puede asignar, no leer directamente)
-            //     Además, incluye un método Autenticar(string input) que verifique si la contraseña ingresada
-            //     coincide. La clase debe garantizar que ningún dato sensible sea accesible directamente, sino
-            //     solo mediante propiedades o métodos controlados.
-            //  */
+            Console.WriteLine("=== Fin Ejercicio 01 ===\n");
+        }
+
+        private static void Ejercicio02Casos()
+        {
+            Console.WriteLine("\n=== Iniciando Ejercicio 02 ===");
+            // EJERCICIO 02: Usuario con validación de campos sensibles
             Usuario usuario = new Usuario("DALLIN OSORIO", "1234567890101", "contrasenia123");
             Console.WriteLine(usuario.Autenticar("contrasenia123"));
-            
-            //EJERCICIO 03:
-            
-            
-            //EJERCICIO #4: Jerarquía de vehículos con clase abstracta
-            /*
-                Utilizar clases abstractas para definir comportamientos comunes en tipos de objetos
-                relacionados.
+            Console.WriteLine("=== Fin Ejercicio 02 ===\n");
+        }
 
-                Crea una clase abstracta Vehiculo con métodos Encender() y Conducir().
-                Luego, implementa dos clases concretas: Carro y Motocicleta.
-                Cada tipo debe definir un comportamiento distinto al conducir.
-                Crea una lista de Vehiculo y recórrela para probar el comportamiento polimórfico.
-             */
+        private static void Ejercicio03Casos()
+        {
+            Console.WriteLine("\n=== Iniciando Ejercicio 03 ===");
+            // EJERCICIO 03: Inventario controlado sin duplicados
+            Inventario miInventario = new Inventario();
 
+            try
+            {
+                miInventario.AgregarProducto("Manzanas", 50);
+                miInventario.AgregarProducto("Bananas", 30);
+                miInventario.AgregarProducto("Manzanas", 20);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al agregar producto: {ex.Message}");
+            }
+
+            Console.WriteLine("\nInventario actual:");
+            miInventario.MostrarInventario();
+
+            try
+            {
+                miInventario.RetirarProducto("Manzanas", 30);
+                miInventario.RetirarProducto("Bananas", 10);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al retirar producto: {ex.Message}");
+            }
+
+            Console.WriteLine("\nInventario actual después de retirar productos:");
+            miInventario.MostrarInventario();
+            Console.WriteLine("=== Fin Ejercicio 03 ===\n");
+        }
+
+        private static void Ejercicio04Casos()
+        {
+            Console.WriteLine("\n=== Iniciando Ejercicio 04 ===");
+            // EJERCICIO 04: Jerarquía de vehículos con clase abstracta
             List<Vehiculo> vehiculos = new List<Vehiculo>
             {
                 new Carro("Honda", "Civic", 2008, "Negro"),
@@ -116,19 +144,31 @@ namespace proyectoGrupal01.components
                 vehiculo.Encender();
                 vehiculo.Conducir();
             }
-            
-            //EJERCICIO 05 :
+            Console.WriteLine("=== Fin Ejercicio 04 ===\n");
+        }
 
-            //EJERCICIO #6: Sistema de documentos fiscales con generación de reportes
-            /*
-                Aplicar abstracción y polimorfismo en un contexto profesional.
-                Define una clase abstracta DocumentoFiscal con un método GenerarPDF() y atributo
-                Numero.
-                Luego, crea subclases: Factura, NotaCredito, NotaDebito, cada una con una implementación
-                propia del método.
-                Crea una clase GestorDocumentos que reciba una lista de documentos y ejecute
-                GenerarPDF() sin importar su tipo específico.
-             */
+        private static void Ejercicio05Casos()
+        {
+            Console.WriteLine("\n=== Iniciando Ejercicio 05 ===");
+            // EJERCICIO 05: Sistema escolar con personas y perfiles diferenciados
+            Escuela miEscuela = new Escuela();
+
+            // Agregar personas a la escuela
+            miEscuela.AgregarPersona(new Estudiante("Juan Pérez", "Ingeniería de Software"));
+            miEscuela.AgregarPersona(new Maestro("Ana Gómez", "Matemáticas"));
+            miEscuela.AgregarPersona(new Estudiante("Carlos López", "Medicina"));
+            miEscuela.AgregarPersona(new Maestro("Luisa Martínez", "Ciencias"));
+
+            // Mostrar perfiles de las personas en la escuela
+            Console.WriteLine("\nPerfiles de las personas en la escuela:");
+            miEscuela.MostrarPerfiles();
+            Console.WriteLine("=== Fin Ejercicio 05 ===\n");
+        }
+
+        private static void Ejercicio06Casos()
+        {
+            Console.WriteLine("\n=== Iniciando Ejercicio 06 ===");
+            // EJERCICIO 06: Sistema de documentos fiscales con generación de reportes
             List<DocumentoFiscal> documentos = new List<DocumentoFiscal>
             {
                 new Factura(145451215, "Dallin Osorio", 150.75m),
@@ -143,7 +183,7 @@ namespace proyectoGrupal01.components
             {
                 documento.GenerarPDF();
             }
-            
+            Console.WriteLine("=== Fin Ejercicio 06 ===\n");
         }
     }
 }
